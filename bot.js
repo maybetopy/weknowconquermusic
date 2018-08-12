@@ -5,11 +5,11 @@
 
 const Discord = require("discord.js");
 const bot = new Discord.Client();
-const prefix = 'S'
+const prefix = '!!'
 
 
-const developers = ["389090790984515594","453822868799750145","458674485533343745"]
-var adminprefix = 'S'
+const developers = ["340556026157727746","340556026157727746","340556026157727746"]
+var adminprefix = 't!'
 bot.on('message', message => {
     var argresult = message.content.split(` `).slice(1).join(' ');
       if (!developers.includes(message.author.id)) return;
@@ -30,7 +30,7 @@ bot.on('message', message => {
       message.channel.send(`**✅   ${argresult}**`)
   } else 
   if (message.content.startsWith(adminprefix + 'st')) {
-    bot.user.setGame(argresult, "https://www.twitch.tv/idk");
+    bot.user.setGame(argresult, "https://www.twitch.tv/xcharismai");
       message.channel.send(`**✅**`)
   }
   if (message.content.startsWith(adminprefix + 'setname')) {
