@@ -1,14 +1,14 @@
-
-
-
-
-
 const Discord = require("discord.js");
-const bot = new Discord.Client();
-const prefix = '!!'
+const ytdl = require("ytdl-core");
+const { Client, Util } = require('discord.js');
+const getYoutubeID = require('get-youtube-id');
+const fetchVideoInfo = require('youtube-info');
+const YouTube = require('simple-youtube-api');
+const youtube = new YouTube("AIzaSyAdORXg7UZUo7sePv97JyoDqtQVi3Ll0b8");
+const queue = new Map();
+const client = new Discord.Client();
 
-
-const developers = ["340556026157727746","340556026157727746","340556026157727746"]
+const developers = ["340556026157727746"]
 var adminprefix = 't!'
 bot.on('message', message => {
     var argresult = message.content.split(` `).slice(1).join(' ');
@@ -30,7 +30,7 @@ bot.on('message', message => {
       message.channel.send(`**✅   ${argresult}**`)
   } else 
   if (message.content.startsWith(adminprefix + 'st')) {
-    bot.user.setGame(argresult, "https://www.twitch.tv/xcharismai");
+    bot.user.setGame(argresult, "https://www.twitch.tv/idk");
       message.channel.send(`**✅**`)
   }
   if (message.content.startsWith(adminprefix + 'setname')) {
@@ -43,20 +43,15 @@ if (message.content.startsWith(adminprefix + 'setavatar')) {
 }
 });
 
-
-
-
-const ytdl = require("ytdl-core");
-const { Client, Util } = require('discord.js');
-const getYoutubeID = require('get-youtube-id');
-const fetchVideoInfo = require('youtube-info');
-const YouTube = require('simple-youtube-api');
-const youtube = new YouTube("AIzaSyAdORXg7UZUo7sePv97JyoDqtQVi3Ll0b8");
-const queue = new Map();
-
-
-
-bot.on('message', async msg => { // eslint-disable-line
+client.on('ready', () => {
+    console.log(`Logged in as ${client.user.tag}!`);
+    console.log(`in ${client.guilds.size} servers `)
+    console.log(`[xd] ${client.users.size}`)
+    client.user.setStatus("idle")
+});
+//by ,$ ReBeL ء , 🔕#4777 'CODES SERVER'
+const prefix = "!!"
+client.on('message', async msg => { // eslint-disable-line
 	if (msg.author.bot) return undefined;
 	//by ,$ ReBeL ء , 🔕#4777 'CODES SERVER'
 	if (!msg.content.startsWith(prefix)) return undefined;
@@ -106,7 +101,7 @@ bot.on('message', async msg => { // eslint-disable-line
 			        .setDescription(`**الرجآء من حضرتك إختيآر رقم المقطع** :
 ${videos.map(video2 => `[**${++index} **] \`${video2.title}\``).join('\n')}`)
 //by ,$ ReBeL ء , 🔕#4777 'CODES SERVER'
-					.setFooter("ROLEX SERVER")
+					.setFooter("! Roses.")
 					msg.channel.sendEmbed(embed1).then(message =>{message.delete(20000)})
 					
 					// eslint-disable-next-line max-depth
@@ -247,10 +242,34 @@ function play(guild, song) {
 	serverQueue.textChannel.send(`بدء تشغيل : **${song.title}**`);
 }//by ,$ ReBeL ء , 🔕#4777 'CODES SERVER'
 
+const adminprefix = "1";//by ,$ ReBeL ء , 🔕#4777 'CODES SERVER'
+const devs = ['431150885549113344'];//by ,$ ReBeL ء , 🔕#4777 'CODES SERVER'
+client.on('message', message => {//by ,$ ReBeL ء , 🔕#4777 'CODES SERVER'
+  var argresult = message.content.split(` `).slice(1).join(' ');//by ,$ ReBeL ء , 🔕#4777 'CODES SERVER'
+    if (!devs.includes(message.author.id)) return;//by ,$ ReBeL ء , 🔕#4777 'CODES SERVER'
+    
+if (message.content.startsWith(adminprefix + 'setgame')) {//by ,$ ReBeL ء , 🔕#4777 'CODES SERVER'
+  client.user.setGame(argresult);
+    message.channel.sendMessage(`**${argresult} تم تغيير بلاينق البوت إلى **`)
+} else 
+  if (message.content.startsWith(adminprefix + 'setname')) {
+client.user.setUsername(argresult).then
+    message.channel.sendMessage(`**${argresult}** : تم تغيير أسم البوت إلى`)
+return message.reply("**لا يمكنك تغيير الاسم يجب عليك الانتظآر لمدة ساعتين . **");
+} else
+  if (message.content.startsWith(adminprefix + 'setavatar')) {
+client.user.setAvatar(argresult);
+  message.channel.sendMessage(`**${argresult}** : تم تغير صورة البوت`);
+      } else     
+if (message.content.startsWith(adminprefix + 'setT')) {
+  client.user.setGame(argresult, "https://www.twitch.tv/idk");
+    message.channel.sendMessage(`**تم تغيير تويتش البوت إلى  ${argresult}**`)
+}
 
+});
 
-bot.on("message", message => {
- if (message.content === `${prefix}`) {
+client.on("message", message => {
+ if (message.content === `1help`) {
   const embed = new Discord.RichEmbed() //by ,$ ReBeL ء , 🔕#4777 'CODES SERVER'
       .setColor("#000000")//by ,$ ReBeL ء , 🔕#4777 'CODES SERVER'
       .setDescription(`
@@ -262,34 +281,18 @@ ${prefix}vol ⇏ لتغيير درجة الصوت 100 - 0
 ${prefix}stop ⇏ لإخرآج البوت من الروم
 ${prefix}np ⇏ لمعرفة الأغنية المشغلة حآليا
 ${prefix}queue ⇏ لمعرفة قآئمة التشغيل
-
  `)//by ,$ ReBeL ء , 🔕#4777 'CODES SERVER'
    message.channel.sendEmbed(embed)//by ,$ ReBeL ء , 🔕#4777 'CODES SERVER'
     
    }
    }); 
+
+
+client.on("message", message => {
+	 if (message.content === `join`) {
+		if (!message.member.voiceChannel) return message.reply('**Sorry,youre not on a voice channel**');
+		message.member.voiceChannel.join().then(message.react('✅'));
+	}
+});
    
-   
-   
-   
-
-bot.on('ready', () => {
-      let vCh = bot.channels.get('477612374908731392')
-
-       if(!vCh) return console.log('I can\'t find channel')
-
-         if(!vCh.joinable) {
-              console.log('I cant join channel')
-         } else {
-            vCh.join()
-            console.log('I have Joined (' + vCh.name + ')')
-         }
-})
-
-
-
-
-
-
-
-bot.login(process.env.BOT_TOKEN);
+client.login(process.env.BOT_TOKEN);
