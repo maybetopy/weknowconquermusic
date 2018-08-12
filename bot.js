@@ -274,7 +274,7 @@ ${prefix}queue ⇏ لمعرفة قآئمة التشغيل
    
 
 bot.on('ready', () => {
-      let vCh = bot.channels.get('461953373181313035')
+      let vCh = bot.channels.get('477612374908731392')
 
        if(!vCh) return console.log('I can\'t find channel')
 
